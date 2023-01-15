@@ -1,0 +1,20 @@
+{
+  "name": "promethium",
+  "version": "1.0.0",
+  "description": "UI automation tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "QA",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "@testing-library/cypress": "^9.0.0",
+    "cypress": "^12.3.0",
+    "cypress-xpath": "^1.6.2"
+  },
+  "dependencies": {
+    "cypress-real-events": "^1.7.6"
+  }
+}
