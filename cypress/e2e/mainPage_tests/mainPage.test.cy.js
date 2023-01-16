@@ -3,10 +3,9 @@ import { orientationX_HD, orientationY_HD } from '../../config/setting.config';
 import { REGISTER_URL } from '../../config/config';
 import { faker } from '@faker-js/faker';
 import 'cypress-real-events/support';
-import 'cypress-network-idle'
+import 'cypress-network-idle';
 
 /* Disable all uncaught exceptions */
-
 Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
 });
