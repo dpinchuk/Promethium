@@ -71,8 +71,6 @@ context('3. [MAIN_PAGE] Checking for header menu', () => {
         cy.waitForNetworkIdle('+(POST|GET)', '*', 5000);
         // cy.get('header li').eq(0).should('be.visible').click().invoke('show').then(() => {
         cy.get('header li').eq(0).should('be.visible').trigger('mouseover').then(() => {
-            //cy.get('header li').eq(0).find('ul li').eq(4).click();
-            //cy.contains('Data Connectors').click( { force: true });
             cy.get('a[href="https://www.pm61data.com/promethium-data-connectors"]').eq(1).click();
             cy.url().should('include', '/promethium-data-connectors');
             cy.get('div[data-testid="mesh-container-content"]').eq(6).find('.MazNVa')
