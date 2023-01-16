@@ -66,7 +66,6 @@ xcontext('2. [MAIN_PAGE] Actions', () => {
 
 context('3. [MAIN_PAGE] Checking for header menu', () => {
     it('should see [PRODUCT MENU ITEM] Data Connectors', () => {
-        //cy.wait(20000);
         cy.waitForNetworkIdle('+(POST|GET)', '*', 5000);
         // cy.get('header li').eq(0).should('be.visible').click().invoke('show').then(() => {
         cy.get('header li').eq(0).should('be.visible').trigger('mouseover').then(() => {
