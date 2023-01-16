@@ -16,7 +16,7 @@ beforeEach(() => {
     mainSteps.openHomePage();
 });
 
-xcontext('1. [MAIN_PAGE] Checking for present elements', () => {
+context('1. [MAIN_PAGE] Checking for present elements', () => {
     it('should see [LOGO] Logo', () => {
         mainSteps.checkLogoPresence();
     });
@@ -30,7 +30,7 @@ xcontext('1. [MAIN_PAGE] Checking for present elements', () => {
     });
 });
 
-xcontext('2. [MAIN_PAGE] Actions', () => {
+context('2. [MAIN_PAGE] Actions', () => {
     it('Handling new tab: Registration page', () => {
         mainSteps.clickOnTryNowButton();
         const email = faker.internet.exampleEmail('test_company_');
