@@ -1,8 +1,9 @@
-import {mainSteps} from "../../page-steps/main/main.steps";
-import {orientationX_HD, orientationY_HD} from "../../config/setting.config";
-import {REGISTER_URL} from "../../config/config";
-import {faker} from '@faker-js/faker';
-import "cypress-real-events/support";
+import { mainSteps } from '../../page-steps/main/main.steps';
+import { orientationX_HD, orientationY_HD } from '../../config/setting.config';
+import { REGISTER_URL } from '../../config/config';
+import { faker } from '@faker-js/faker';
+import 'cypress-real-events/support';
+import 'cypress-network-idle'
 
 /* Disable all uncaught exceptions */
 
@@ -12,9 +13,8 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 /* Before each test */
 beforeEach(() => {
-    cy.visit('https://www.pm61data.com/resource-library');
-    //cy.viewport(orientationX_HD, orientationY_HD);
-    //mainSteps.openHomePage();
+    cy.viewport(orientationX_HD, orientationY_HD);
+    mainSteps.openHomePage();
 });
 
 xcontext('1. [MAIN_PAGE] Checking for present elements', () => {
@@ -65,9 +65,15 @@ xcontext('2. [MAIN_PAGE] Actions', () => {
     });
 });
 
-xcontext('3. [MAIN_PAGE] Checking for header menu', () => {
+context('3. [MAIN_PAGE] Checking for header menu', () => {
     it('should see [PRODUCT MENU ITEM] Data Connectors', () => {
-        cy.get('header li').eq(0).should('be.visible').click().invoke('show').then(() => {
+        //cy.wait(20000);
+        cy.waitForNetworkIdle('+(POST|GET)', '*', 5000);
+        // cy.get('header li').eq(0).should('be.visible').click().invoke('show').then(() => {
+        cy.get('header li').eq(0).should('be.visible').trigger('mouseover').then(() => {
+            //cy.get('header li').eq(0).find('ul li').eq(4).click();
+            //cy.contains('Data Connectors').click( { force: true });
+            cy.get('a[href="https://www.pm61data.com/promethium-data-connectors"]').eq(1).click();
             cy.url().should('include', '/promethium-data-connectors');
             cy.get('div[data-testid="mesh-container-content"]').eq(6).find('.MazNVa')
                 .should('have.length', 17)
@@ -81,7 +87,7 @@ xcontext('3. [MAIN_PAGE] Checking for header menu', () => {
     });
 });
 
-context('4. [MAIN_PAGE] Checking for header menu', () => {
+xcontext('4. [MAIN_PAGE] Checking for header menu', () => {
     it('should see [PRODUCT MENU ITEM] Data Connectors', () => {
         //cy.get('header li').eq(2).should('be.visible').click().invoke('show').then(() => {
             cy.url().should('include', '/promethium-data-connectors');
