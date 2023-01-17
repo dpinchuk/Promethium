@@ -1,9 +1,10 @@
-import { mainSteps } from '../../page-steps/main/main.steps';
-import { orientationX_HD, orientationY_HD } from '../../config/setting.config';
-import { REGISTER_URL } from '../../config/config';
-import { faker } from '@faker-js/faker';
 import 'cypress-real-events/support';
 import 'cypress-network-idle';
+import { mainSteps } from '../../page-steps/main/main.steps';
+import { DATA_CONNECTORS_DATABASE_IMG_COUNT, orientationX_HD, orientationY_HD } from '../../config/setting.config';
+import { REGISTER_URL } from '../../config/config';
+import { faker } from '@faker-js/faker';
+import { dataConnectorsSteps } from "../../page-steps/data-connectors/data-connectors.steps";
 
 /* Disable all uncaught exceptions */
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -14,23 +15,19 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 beforeEach(() => {
     cy.viewport(orientationX_HD, orientationY_HD);
     mainSteps.openHomePage();
+    cy.waitForNetworkIdle('+(POST|GET)', '*', 5000);
 });
 
 context('1. [MAIN_PAGE] Checking for present elements', () => {
-    it('should see [LOGO] Logo', () => {
+    it('should see [LOGO, TEXT1, TEXT2] Logo, Promethium Collaborative Data Analytics, Never miss an opportunity', () => {
         mainSteps.checkLogoPresence();
+        mainSteps.checkText('Promethium Collaborative Data Analytics');
+        mainSteps.checkText('Never miss an opportunity.');
     });
 
-    it('should see [TEXT1] Promethium Collaborative Data Analytics', () => {
-        mainSteps.checkText1();
-    });
-
-    it('should see [TEXT2] Never miss an opportunity ', () => {
-        mainSteps.checkText2();
-    });
 });
 
-context('2. [MAIN_PAGE] Actions', () => {
+context('2. [MAIN_PAGE] Checking for registration', () => {
     it('Handling new tab: Registration page', () => {
         mainSteps.clickOnTryNowButton();
         const email = faker.internet.exampleEmail('test_company_');
@@ -66,22 +63,16 @@ context('2. [MAIN_PAGE] Actions', () => {
 
 context('3. [MAIN_PAGE] Checking for header menu', () => {
     it('should see [PRODUCT MENU ITEM] Data Connectors', () => {
-
-        cy.waitForNetworkIdle('+(POST|GET)', '*', 5000);
-
-        cy.get('header li').eq(0).should('be.visible').trigger('mouseover').then(() => {
-
-            cy.get('a[href="https://www.pm61data.com/promethium-data-connectors"]').eq(1).click();
-
+        mainSteps.hoverOnProductMenuItem().then(() => {
+            mainSteps.clickOnDataConnectorProductMenuItem();
             cy.url().should('include', '/promethium-data-connectors');
-
-            cy.get('div[data-testid="mesh-container-content"]').eq(6).find('.MazNVa')
-                .should('have.length', 17)
+            dataConnectorsSteps.getDatabaseConnectorsImg()
+                .should('have.length', DATA_CONNECTORS_DATABASE_IMG_COUNT)
                 .then(() => {
-                    cy.findByText('Microsoft SQL Server');
-                    cy.findByText('MySQL').should('be.visible');
-                    cy.findByText('PostgreSQL').should('be.visible');
-                    cy.findByText('Teradata').should('be.visible');
+                    mainSteps.checkText('Microsoft SQL Server');
+                    mainSteps.checkText('MySQL');
+                    mainSteps.checkText('PostgreSQL');
+                    mainSteps.checkText('Teradata');
                 });
         })
     });
@@ -89,16 +80,11 @@ context('3. [MAIN_PAGE] Checking for header menu', () => {
 
 xcontext('4. [MAIN_PAGE] Checking for header menu', () => {
     it('should see [PRODUCT MENU ITEM] Data Connectors', () => {
-        //cy.get('header li').eq(2).should('be.visible').click().invoke('show').then(() => {
-            cy.url().should('include', '/promethium-data-connectors');
-            cy.get('div[data-testid="mesh-container-content"]').eq(6).find('.MazNVa')
-                .should('have.length', 17)
-                .then(() => {
-                    cy.findByText('Microsoft SQL Server');
-                    cy.findByText('MySQL').should('be.visible');
-                    cy.findByText('PostgreSQL').should('be.visible');
-                    cy.findByText('Teradata').should('be.visible');
-                });
-       // })
+        mainSteps.hoverOnResourcesMenuItem().then(() => {
+            mainSteps.clickOnCollateralAndWebinarsResourcesMenuItem();
+            cy.url().should('include', '/resource-library').then(() => {
+                cy.findAllByText('Download').eq(12).should('be.visible');
+            });
+        });
     });
 });

@@ -3,10 +3,10 @@ import { REGISTER_URL } from "../../config/config";
 
 const HEADER = 'header';
 const LOGO = 'img';
-const TEXT1 = 'Promethium Collaborative Data Analytics';
-const TEXT2 = 'Never miss an opportunity.';
 const TRY_NOW = `a[href="${REGISTER_URL}"]`;
-const HEADER_NAVBAR_ITEMS = 'li';
+const HEADER_NAVBAR_ITEMS = 'ul li';
+const DATA_CONNECTOR = 'a[href="https://www.pm61data.com/promethium-data-connectors"]';
+const COLLATERAL_AND_WEBINAR = 'a[href="https://www.pm61data.com/resource-library"]';
 
 const header = {
     itself() {
@@ -15,17 +15,25 @@ const header = {
     getLogo() {
         return this.itself().find(LOGO);
     },
-    getText1() {
-        return cy.findByText(TEXT1);
-    },
-    getText2() {
-        return cy.findByText(TEXT2);
+    getText(text) {
+        return cy.findByText(text);
     },
     getTryNowButton() {
         return this.itself().find(TRY_NOW).invoke('removeAttr', 'target');
     },
     getProductMenuItem() {
-        return this.itself().find(HEADER_NAVBAR_ITEMS).eq(0)
+        // return this.itself().find(HEADER_NAVBAR_ITEMS).eq(0);
+        return this.itself().findByText('Product');
+    },
+    getResourcesMenuItem() {
+        // return this.itself().find(HEADER_NAVBAR_ITEMS).eq(2);
+        return this.itself().findByText('Resources');
+    },
+    getDataConnectorProductMenuItem() {
+        return this.itself().find(DATA_CONNECTOR).eq(1);
+    },
+    getCollateralAndWebinarsResourcesMenuItem() {
+        return this.itself().find(COLLATERAL_AND_WEBINAR).eq(1);
     },
 };
 

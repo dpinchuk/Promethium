@@ -6,23 +6,26 @@ const mainSteps = {
         mainPage.visit();
     },
     checkLogoPresence() {
-        header.getLogo()
-            .should('be.visible');
+        header.getLogo().should('be.visible');
     },
-    checkText1() {
-        header.getText1()
-            .should('be.visible');
-    },
-    checkText2() {
-        header.getText2()
-            .should('be.visible');
+    checkText(text) {
+        header.getText(text).should('be.visible');
     },
     clickOnTryNowButton() {
         return header.getTryNowButton().click();
     },
     hoverOnProductMenuItem() {
         return header.getProductMenuItem().trigger('mouseover');
-    }
+    },
+    hoverOnResourcesMenuItem() {
+        return header.getResourcesMenuItem().trigger('mouseover');
+    },
+    clickOnDataConnectorProductMenuItem() {
+        return header.getDataConnectorProductMenuItem().click();
+    },
+    clickOnCollateralAndWebinarsResourcesMenuItem() {
+        return header.getCollateralAndWebinarsResourcesMenuItem().click();
+    },
 };
 
 export { mainSteps };
