@@ -1,7 +1,7 @@
 import '@testing-library/cypress/add-commands'
 import { REGISTER_URL } from "../../config/config";
 
-const HEADER = 'header';
+const HEADER = '#SITE_HEADER';
 const LOGO = 'img';
 const TRY_NOW = `a[href="${REGISTER_URL}"]`;
 const HEADER_NAVBAR_ITEMS = 'ul li';
@@ -19,7 +19,7 @@ const header = {
         return cy.findByText(text);
     },
     getTryNowButton() {
-        return this.itself().find(TRY_NOW).invoke('removeAttr', 'target');
+        return this.itself().find(TRY_NOW);
     },
     getProductMenuItem() {
         // return this.itself().find(HEADER_NAVBAR_ITEMS).eq(0);
