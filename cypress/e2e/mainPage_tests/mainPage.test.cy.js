@@ -1,11 +1,11 @@
 import 'cypress-real-events/support';
 import 'cypress-network-idle';
-import { mainSteps } from '../../page-steps/main/main.steps';
-import { DATA_CONNECTORS_DATABASE_IMG_COUNT, orientationX_HD, orientationY_HD } from '../../config/setting.config';
-import { REGISTER_URL, SOLUTION_FOR_DBT_URL } from '../../config/config';
-import { faker } from '@faker-js/faker';
-import { dataConnectorsSteps } from "../../page-steps/data-connectors/data-connectors.steps";
-import { resourceLibrarySteps } from "../../page-steps/resource-library/resource-library.steps";
+import {mainSteps} from '../../page-steps/main/main.steps';
+import {DATA_CONNECTORS_DATABASE_IMG_COUNT, orientationX_HD, orientationY_HD} from '../../config/setting.config';
+import {REGISTER_URL, SOLUTION_FOR_DBT_URL} from '../../config/config';
+import {faker} from '@faker-js/faker';
+import {dataConnectorsSteps} from "../../page-steps/data-connectors/data-connectors.steps";
+import {resourceLibrarySteps} from "../../page-steps/resource-library/resource-library.steps";
 
 /* Disable all uncaught exceptions */
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -81,13 +81,15 @@ context('3. [MAIN_PAGE] Checking for header menu', () => {
 
 context('4. [MAIN_PAGE] Checking for header menu', () => {
     it('should see [PRODUCT MENU ITEM] Data Connectors', () => {
+        const text1 = 'Reimagining data analytics';
         mainSteps.hoverOnResourcesMenuItem().then(() => {
             mainSteps.clickOnCollateralAndWebinarsResourcesMenuItem()
             cy.url().should('include', '/resource-library').then(() => {
                 cy.contains('Information Sheets and Solution Briefs').should('be.visible');
-                resourceLibrarySteps.clickOnSolutionForDbtDownloadButton();
-                //cy.readFile('https://www.pm61data.com/_files/ugd/35da03_6f1977b115664a73b66b472d90d021f8.pdf', 'utf8')
+                resourceLibrarySteps.clickOnSolutionForDbtDownloadButton().then(() => {
+                });
             });
         });
     });
+
 });

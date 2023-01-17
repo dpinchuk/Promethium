@@ -2,7 +2,7 @@ import { resourceLibraryPage } from "../../page-objects/resource-library/resourc
 
 const resourceLibrarySteps = {
     clickOnSolutionForDbtDownloadButton() {
-        return resourceLibraryPage.getSolutionForDbtDownloadButton().invoke('removeAttr', 'target')
+        return resourceLibraryPage.getSolutionForDbtDownloadButton().invoke('removeAttr', 'target').click();
     },
 };
 
