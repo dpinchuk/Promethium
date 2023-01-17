@@ -12,7 +12,7 @@ const mainSteps = {
         header.getText(text).should('be.visible');
     },
     clickOnTryNowButton() {
-        return header.getTryNowButton().click();
+        return header.getTryNowButton().invoke('removeAttr', 'target').click();
     },
     hoverOnProductMenuItem() {
         return header.getProductMenuItem().trigger('mouseover');

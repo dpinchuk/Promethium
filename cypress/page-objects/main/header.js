@@ -19,7 +19,8 @@ const header = {
         return cy.findByText(text);
     },
     getTryNowButton() {
-        return this.itself().find(TRY_NOW);
+        return cy.get(TRY_NOW).eq(0);
+        // return this.itself().find(TRY_NOW);
     },
     getProductMenuItem() {
         // return this.itself().find(HEADER_NAVBAR_ITEMS).eq(0);

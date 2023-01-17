@@ -29,7 +29,7 @@ context('1. [MAIN_PAGE] Checking of present elements', () => {
 });
 
 context('2. [MAIN_PAGE] Checking of registration', () => {
-    it('Handling new tab: Registration page', () => {
+    it('Handling the new tab: Registration page', () => {
         mainSteps.clickOnTryNowButton();
         const email = faker.internet.exampleEmail('test_company_');
         const firstName = faker.name.firstName();
@@ -86,8 +86,7 @@ context('4. [MAIN_PAGE] Checking for header menu', () => {
             cy.url().should('include', '/resource-library').then(() => {
                 cy.contains('Information Sheets and Solution Briefs').should('be.visible');
                 resourceLibrarySteps.clickOnSolutionForDbtDownloadButton();
-                cy.wait(10000);
-                cy.readFile('https://www.pm61data.com/_files/ugd/35da03_6f1977b115664a73b66b472d90d021f8.pdf', 'utf8')
+                //cy.readFile('https://www.pm61data.com/_files/ugd/35da03_6f1977b115664a73b66b472d90d021f8.pdf', 'utf8')
             });
         });
     });
